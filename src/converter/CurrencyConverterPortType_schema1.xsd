@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://converter/" xmlns:tns="http://converter/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="convertBetweenCurrencies" type="tns:convertBetweenCurrencies"/>
+
+  <xs:element name="convertBetweenCurrenciesResponse" type="tns:convertBetweenCurrenciesResponse"/>
+
+  <xs:element name="getConversionRate" type="tns:getConversionRate"/>
+
+  <xs:element name="getConversionRateResponse" type="tns:getConversionRateResponse"/>
+
+  <xs:element name="getCurrencyDescription" type="tns:getCurrencyDescription"/>
+
+  <xs:element name="getCurrencyDescriptionResponse" type="tns:getCurrencyDescriptionResponse"/>
+
+  <xs:element name="getRates" type="tns:getRates"/>
+
+  <xs:element name="getRatesResponse" type="tns:getRatesResponse"/>
+
+  <xs:complexType name="getCurrencyDescription">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:currency" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCurrencyDescriptionResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertBetweenCurrencies">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:currency" minOccurs="0"/>
+      <xs:element name="arg1" type="tns:currency" minOccurs="0"/>
+      <xs:element name="arg2" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="convertBetweenCurrenciesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getConversionRate">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:currency" minOccurs="0"/>
+      <xs:element name="arg1" type="tns:currency" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getConversionRateResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRates">
+    <xs:sequence>
+      <xs:element name="arg0" type="tns:currency" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRatesResponse">
+    <xs:sequence>
+      <xs:element name="return" type="tns:hashMapResponse" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="hashMapResponse">
+    <xs:sequence>
+      <xs:element name="Rates">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="key" minOccurs="0" type="xs:double"/>
+                  <xs:element name="value" minOccurs="0" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="currency">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HRK"/>
+      <xs:enumeration value="USD"/>
+      <xs:enumeration value="CZK"/>
+      <xs:enumeration value="EUR"/>
+      <xs:enumeration value="IND"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

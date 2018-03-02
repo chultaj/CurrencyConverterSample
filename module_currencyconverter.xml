@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_currencyconverter" default="compile.module.currencyconverter">
+  <dirname property="module.currencyconverter.basedir" file="${ant.file.module_currencyconverter}"/>
+  
+  <property name="module.jdk.home.currencyconverter" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.currencyconverter" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.currencyconverter" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.currencyconverter" value="-encoding UTF-8 -source 1.6 -target 1.7 ${compiler.args}"/>
+  
+  <property name="currencyconverter.output.dir" value="${module.currencyconverter.basedir}/out/production/currencyconverter"/>
+  <property name="currencyconverter.testoutput.dir" value="${module.currencyconverter.basedir}/out/test/currencyconverter"/>
+  
+  <path id="currencyconverter.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="currencyconverter.module.production.classpath">
+    <path refid="${module.jdk.classpath.currencyconverter}"/>
+    <path refid="library.jax-ws-glassfish_/_jax-ws_2.2_ri_/_metro_1.x_/_jwsdp_2.2.classpath"/>
+    <path refid="library.tomcat_6.classpath"/>
+  </path>
+  
+  <path id="currencyconverter.runtime.production.module.classpath">
+    <pathelement location="${currencyconverter.output.dir}"/>
+    <path refid="library.jax-ws-glassfish_/_jax-ws_2.2_ri_/_metro_1.x_/_jwsdp_2.2.classpath"/>
+  </path>
+  
+  <path id="currencyconverter.module.classpath">
+    <path refid="${module.jdk.classpath.currencyconverter}"/>
+    <pathelement location="${currencyconverter.output.dir}"/>
+    <path refid="library.jax-ws-glassfish_/_jax-ws_2.2_ri_/_metro_1.x_/_jwsdp_2.2.classpath"/>
+    <path refid="library.tomcat_6.classpath"/>
+  </path>
+  
+  <path id="currencyconverter.runtime.module.classpath">
+    <pathelement location="${currencyconverter.testoutput.dir}"/>
+    <pathelement location="${currencyconverter.output.dir}"/>
+    <path refid="library.jax-ws-glassfish_/_jax-ws_2.2_ri_/_metro_1.x_/_jwsdp_2.2.classpath"/>
+    <path refid="library.tomcat_6.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.currencyconverter">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.currencyconverter">
+    <patternset refid="excluded.from.module.currencyconverter"/>
+  </patternset>
+  
+  <path id="currencyconverter.module.sourcepath">
+    <dirset dir="${module.currencyconverter.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.currencyconverter" depends="compile.module.currencyconverter.production,compile.module.currencyconverter.tests" description="Compile module currencyconverter"/>
+  
+  <target name="compile.module.currencyconverter.production" depends="register.custom.compilers" description="Compile module currencyconverter; production classes">
+    <mkdir dir="${currencyconverter.output.dir}"/>
+    <javac2 destdir="${currencyconverter.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.currencyconverter}/javac">
+      <compilerarg line="${compiler.args.currencyconverter}"/>
+      <bootclasspath refid="currencyconverter.module.bootclasspath"/>
+      <classpath refid="currencyconverter.module.production.classpath"/>
+      <src refid="currencyconverter.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.currencyconverter"/>
+    </javac2>
+    
+    <copy todir="${currencyconverter.output.dir}">
+      <fileset dir="${module.currencyconverter.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.currencyconverter.tests" depends="register.custom.compilers,compile.module.currencyconverter.production" description="compile module currencyconverter; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.currencyconverter" description="cleanup module">
+    <delete dir="${currencyconverter.output.dir}"/>
+    <delete dir="${currencyconverter.testoutput.dir}"/>
+  </target>
+</project>

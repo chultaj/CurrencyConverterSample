@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="currencyconverter" default="all">
+  
+  
+  <property file="currencyconverter.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <include name="**/*?.class"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.7" value="${jdk.home.1.7}/bin"/>
+  <path id="jdk.classpath.1.7">
+    <fileset dir="${jdk.home.1.7}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxrt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.7}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.7}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.7"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.jax-ws-glassfish_/_jax-ws_2.2_ri_/_metro_1.x_/_jwsdp_2.2.classpath">
+    <pathelement location="${basedir}/lib/FastInoset.jar"/>
+    <pathelement location="${basedir}/lib/gmbal-api-only.jar"/>
+    <pathelement location="${basedir}/lib/ha-api.jar"/>
+    <pathelement location="${basedir}/lib/javax.annotation.jar"/>
+    <pathelement location="${basedir}/lib/jaxb-api.jar"/>
+    <pathelement location="${basedir}/lib/jaxb-impl.jar"/>
+    <pathelement location="${basedir}/lib/jaxb-xjc.jar"/>
+    <pathelement location="${basedir}/lib/jaxws-api.jar"/>
+    <pathelement location="${basedir}/lib/jaxws-rt.jar"/>
+    <pathelement location="${basedir}/lib/jaxws-tools.jar"/>
+    <pathelement location="${basedir}/lib/jsr181-api.jar"/>
+    <pathelement location="${basedir}/lib/mail.jar"/>
+    <pathelement location="${basedir}/lib/management-api.jar"/>
+    <pathelement location="${basedir}/lib/mimepull.jar"/>
+    <pathelement location="${basedir}/lib/policy.jar"/>
+    <pathelement location="${basedir}/lib/saaj-api.jar"/>
+    <pathelement location="${basedir}/lib/saaj-impl.jar"/>
+    <pathelement location="${basedir}/lib/stax-ex.jar"/>
+    <pathelement location="${basedir}/lib/stax2-api.jar"/>
+    <pathelement location="${basedir}/lib/streambuffer.jar"/>
+    <pathelement location="${basedir}/lib/woodstox-core-asl.jar"/>
+  </path>
+  
+  
+  <!-- Application Server Libraries -->
+  
+  <path id="library.tomcat_6.classpath">
+    <fileset dir="C:/apache-tomcat-6.0.41/lib">
+      <patternset refid="library.patterns"/>
+    </fileset>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm4-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/module_currencyconverter.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.currencyconverter" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.currencyconverter" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.currencyconverter" value="${basedir}/../../apache-tomcat-6.0.41/webapps"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.currencyconverter.war" value="${artifacts.temp.dir}/currencyconverter.war"/>
+  </target>
+  
+  <target name="artifact.currencyconverter" depends="init.artifacts, compile.module.currencyconverter" description="Build &#39;currencyconverter&#39; artifact">
+    <property name="artifact.temp.output.currencyconverter" value="${artifacts.temp.dir}/currencyconverter"/>
+    <mkdir dir="${artifact.temp.output.currencyconverter}"/>
+    <zip destfile="${temp.jar.path.currencyconverter.war}">
+      <zipfileset dir="${basedir}/web"/>
+      <zipfileset file="${basedir}/web/WEB-INF/web.xml" prefix="WEB-INF"/>
+      <zipfileset dir="${currencyconverter.output.dir}" prefix="WEB-INF/classes"/>
+      <zipfileset file="${basedir}/lib/javax.annotation.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/gmbal-api-only.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/ha-api.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/jaxb-api.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/jaxws-api.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/FastInoset.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/jaxb-impl.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/jsr181-api.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/jaxws-tools.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/management-api.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/mimepull.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/mail.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/saaj-api.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/policy.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/jaxb-xjc.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/stax-ex.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/stax2-api.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/streambuffer.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/jaxws-rt.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/saaj-impl.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/lib/woodstox-core-asl.jar" prefix="WEB-INF/lib"/>
+    </zip>
+    <copy file="${temp.jar.path.currencyconverter.war}" tofile="${artifact.temp.output.currencyconverter}/currencyconverter.war"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.currencyconverter" description="Build all artifacts">
+    <mkdir dir="${artifact.output.currencyconverter}"/>
+    <copy todir="${artifact.output.currencyconverter}">
+      <fileset dir="${artifact.temp.output.currencyconverter}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
